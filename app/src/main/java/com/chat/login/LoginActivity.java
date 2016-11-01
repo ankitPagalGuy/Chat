@@ -8,6 +8,7 @@ import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.OnClick;
 import com.chat.BaseActivity;
+import com.chat.MainActivity;
 import com.chat.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -96,16 +97,17 @@ public class LoginActivity  extends BaseActivity implements GoogleApiClient.OnCo
             // signed in user can be handled in the listener.
             if (!task.isSuccessful()) {
               Log.w(TAG, "signInWithCredential", task.getException());
-              Toast.makeText(SignInActivity.this, "Authentication failed.",
+              Toast.makeText(LoginActivity.this, "Authentication failed.",
                   Toast.LENGTH_SHORT).show();
             } else {
-             // startActivity(new Intent(SignInActivity.this, MainActivity.class));
+             startActivity(new Intent(LoginActivity.this, MainActivity.class));
               finish();
             }
           }
         });
   }
   @Override public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+    Log.d(TAG, "onConnectionFailed:" + connectionResult);
+    Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
   }
 }
